@@ -1,0 +1,51 @@
+<section data-ng-controller="TeachersController" data-ng-init="findOne()">
+	<div class="page-header">
+		<h1 data-ng-bind="teacher.name"></h1>
+		<!--<label class="control-label" for="name">Name</label>-->
+		<!--<div class="controls">-->
+			<!--<h4 id="name" class="">{{teacher.name}}</h4>-->
+		<!--</div>-->
+
+
+		<label class="list-group-item-info" for="designation">Designation</label>
+		<div>
+			<h4 id="designation">{{teacher.designation}}</h4>
+		</div>
+
+		<label class="list-group-item-info" for="tid">ID</label>
+		<div>
+			<h4 id="tid">{{teacher.tid}}</h4>
+		</div>
+
+		<label class="list-group-item-info" for="phone">Phone</label>
+		<div>
+			<h4 id="phone">{{teacher.phone}}</h4>
+		</div>
+
+		<label class="list-group-item-info" for="email">Email</label>
+		<div>
+			<h4 id="email">{{teacher.email}}</h4>
+		</div>
+
+		<label class="list-group-item-info" for="department">Department</label>
+		<div>
+			<h4 id="department">{{teacher.department}}</h4>
+		</div>
+	</div>
+	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == teacher.user._id))">
+		<a class="btn btn-primary" href="/#!/teachers/{{teacher._id}}/edit">
+			<i class="glyphicon glyphicon-edit"></i>
+		</a>
+		<a class="btn btn-primary" data-ng-click="remove();">
+			<i class="glyphicon glyphicon-trash"></i>
+		</a>
+	</div>
+	<small>
+		<em class="text-muted">
+			Posted on
+			<span data-ng-bind="teacher.created | date:'mediumDate'"></span>
+			by
+			<span data-ng-bind="teacher.user.displayName"></span>
+		</em>
+	</small>
+</section>

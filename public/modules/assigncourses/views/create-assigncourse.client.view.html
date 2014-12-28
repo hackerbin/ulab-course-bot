@@ -1,0 +1,35 @@
+<section data-ng-controller="AssigncoursesController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>New Assigncourse</h1>
+    </div>
+    <div class="col-md-12">
+        <form class="form-horizontal" data-ng-submit="create()" novalidate>
+            <fieldset>
+                <div class="form-group">
+                    <label class="control-label" for="teacher">Teacher</label>
+                    <div class="controls">
+                        <select data-ng-options="o.name for o in allTeachers" id="teacher" data-ng-model="selectedTeacher" required></select>
+                    </div>
+                    <span>{{selectedTeacher}}</span>
+
+                    <label class="control-label" for="course">Course</label>
+                    <div class="controls">
+                        <select data-ng-options="o.title for o in allCourses" id="course" data-ng-change="loadSection()" data-ng-model="selectedCourse" required></select>
+                    </div>
+                    <span>{{selectedCourse}}</span>
+                    <label class="control-label" for="section">Section</label>
+                    <div class="controls">
+                        <select data-ng-options="o.name for o in filteredSections" id="section" data-ng-model="selectedSection" required></select>
+                    </div>
+                    <span>{{selectedSection}}</span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-default">
+                </div>
+				<div data-ng-show="error" class="text-danger">
+					<strong data-ng-bind="error"></strong>
+				</div>
+            </fieldset>
+        </form>
+    </div>
+</section>

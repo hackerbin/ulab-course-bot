@@ -1,0 +1,40 @@
+<section data-ng-controller="CoursesController" data-ng-init="findOne()">
+	<div class="page-header">
+		<h1 data-ng-bind="course.title"></h1>
+		<!--<h1 data-ng-bind="course.code"></h1>-->
+		<!--<h1 data-ng-bind="course.category"></h1>-->
+		<!--<h1 data-ng-bind="course.semester"></h1>-->
+
+		<label class="list-group-item-info" for="designation">Course Code</label>
+		<div>
+			<h4 id="designation">{{course.code}}</h4>
+		</div>
+
+		<label class="list-group-item-info" for="tid">Category</label>
+		<div>
+			<h4 id="tid">{{course.category}}</h4>
+		</div>
+
+		<label class="list-group-item-info" for="phone">Semester</label>
+		<div>
+			<h4 id="phone">{{course.semester}}</h4>
+		</div>
+
+	</div>
+	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == course.user._id))">
+		<a class="btn btn-primary" href="/#!/courses/{{course._id}}/edit">
+			<i class="glyphicon glyphicon-edit"></i>
+		</a>
+		<a class="btn btn-primary" data-ng-click="remove();">
+			<i class="glyphicon glyphicon-trash"></i>
+		</a>
+	</div>
+	<small>
+		<em class="text-muted">
+			Posted on
+			<span data-ng-bind="course.created | date:'mediumDate'"></span>
+			by
+			<span data-ng-bind="course.user.displayName"></span>
+		</em>
+	</small>
+</section>

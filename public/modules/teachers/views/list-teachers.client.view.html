@@ -1,0 +1,50 @@
+<section data-ng-controller="TeachersController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Teachers</h1>
+    </div>
+    <div class="list-group">
+        <a data-ng-repeat="teacher in teachers" data-ng-href="#!/teachers/{{teacher._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="teacher.created | date:'medium'"></span>
+				by
+				<span data-ng-bind="teacher.user.displayName"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="teacher.name"></h4>
+            <h6 class="list-group-item-info" data-ng-bind="teacher.designation"></h6>
+            <div class="pull-right" onclick="alert('clicked')">
+                <i class="glyphicon glyphicon-envelope">Send Course Schedule</i>
+            </div>
+            <br>
+        </a>
+
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!teachers.$resolved || teachers.length">
+    	No Teachers yet, why don't you <a href="/#!/teachers/create">create one</a>?
+    </div>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script>
+//        $('#yourButtonId').click(function() {
+//                $.ajax({
+//                    type: “POST”,
+//                    url: “https://mandrillapp.com/api/1.0/messages/send.json”,
+//                        data: {
+//                        ‘key’: ‘cuFainaXpGj7Q51UT5Xisg’,
+//                        ‘message’: {
+//                            ‘from_email’: ‘techdecipher@email.com’,
+//                            ‘to’: [
+//                                    {
+//                         ‘email’: ‘tanvir.islam.cse@ulab.edu.bd’,
+//                            ‘name’: ‘Tanvir Islam’,
+//                            ‘type’: ‘to’
+//                            }
+//                        ],
+//                        ‘autotext’: ‘true’,
+//                        ‘subject’: ‘YOUR SUBJECT HERE!’,
+//                        ‘html’: ‘YOUR EMAIL CONTENT HERE! YOU CAN USE HTML!’
+//                        }
+//                }});
+//        });
+    </script>
+</section>
