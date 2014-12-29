@@ -1,14 +1,25 @@
 <section data-ng-controller="AssigncoursesController" data-ng-init="findOne()">
     <div class="page-header">
-        <h1>Edit Assigncourse</h1>
+        <h1>Edit Assigned Course</h1>
     </div>
     <div class="col-md-12">
         <form class="form-horizontal" data-ng-submit="update()" novalidate>
             <fieldset>
                 <div class="form-group">
-                    <label class="control-label" for="name">Name</label>
+                    <label class="control-label" for="teacher">Teacher</label>
                     <div class="controls">
-                        <input type="text" data-ng-model="assigncourse.name" id="name" class="form-control" placeholder="Name" required>
+                        <select data-ng-options="o.name for o in allTeachers" id="teacher" data-ng-model="selectedTeacher" required></select>
+                    </div>
+                    <!--<span>{{selectedTeacher}}</span>-->
+
+                    <label class="control-label" for="course">Course</label>
+                    <div class="controls">
+                        <select data-ng-options="o.title for o in allCourses" id="course" data-ng-change="loadSection()" data-ng-model="selectedCourse" required></select>
+                    </div>
+                    <!--<span>{{selectedCourse}}</span>-->
+                    <label class="control-label" for="section">Section</label>
+                    <div class="controls">
+                        <select data-ng-options="o.name for o in filteredSections" id="section" data-ng-model="selectedSection" required></select>
                     </div>
                 </div>
                 <div class="form-group">

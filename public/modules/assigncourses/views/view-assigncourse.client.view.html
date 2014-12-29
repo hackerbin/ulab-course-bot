@@ -1,6 +1,15 @@
 <section data-ng-controller="AssigncoursesController" data-ng-init="findOne()">
 	<div class="page-header">
 		<h1 data-ng-bind="assigncourse.teacher"></h1>
+		<label class="list-group-item-info" for="designation">Course Code</label>
+		<div>
+			<h4 id="designation">{{assigncourse.course}}</h4>
+		</div>
+
+		<label class="list-group-item-info" for="tid">Section</label>
+		<div>
+			<h4 id="tid">{{assigncourse.section}}</h4>
+		</div>
 	</div>
 	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == assigncourse.user._id))">
 		<a class="btn btn-primary" href="/#!/assigncourses/{{assigncourse._id}}/edit">

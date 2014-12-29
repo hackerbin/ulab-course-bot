@@ -10,18 +10,18 @@
                     <div class="controls">
                         <select data-ng-options="o.name for o in allTeachers" id="teacher" data-ng-model="selectedTeacher" required></select>
                     </div>
-                    <span>{{selectedTeacher}}</span>
+                    <!--<span>{{selectedTeacher}}</span>-->
 
                     <label class="control-label" for="course">Course</label>
                     <div class="controls">
                         <select data-ng-options="o.title for o in allCourses" id="course" data-ng-change="loadSection()" data-ng-model="selectedCourse" required></select>
                     </div>
-                    <span>{{selectedCourse}}</span>
+                    <!--<span>{{selectedCourse}}</span>-->
                     <label class="control-label" for="section">Section</label>
                     <div class="controls">
                         <select data-ng-options="o.name for o in filteredSections" id="section" data-ng-model="selectedSection" required></select>
                     </div>
-                    <span>{{selectedSection}}</span>
+                    <!--<span>{{selectedSection}}</span>-->
                 </div>
                 <div class="form-group">
                     <input type="submit" class="btn btn-default">

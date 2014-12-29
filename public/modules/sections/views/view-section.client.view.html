@@ -1,6 +1,25 @@
 <section data-ng-controller="SectionsController" data-ng-init="findOne()">
 	<div class="page-header">
-		<h1 data-ng-bind="section.name"></h1>
+		<h1 data-ng-bind="section.course"></h1>
+		<label class="list-group-item-info">Section</label>
+		<div>
+			<h4 id="section">{{section.name}}</h4>
+		</div>
+
+		<label class="list-group-item-info" for="tid">Day</label>
+		<div>
+			<h4 id="day">{{section.day}}</h4>
+		</div>
+
+		<label class="list-group-item-info" for="tid">Start Time</label>
+		<div>
+			<h4 id="start">{{section.start}}</h4>
+		</div>
+		<label class="list-group-item-info" for="tid">End Time</label>
+		<div>
+			<h4 id="tid">{{section.end}}</h4>
+		</div>
+
 	</div>
 	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == section.user._id))">
 		<a class="btn btn-primary" href="/#!/sections/{{section._id}}/edit">
