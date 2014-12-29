@@ -2,8 +2,12 @@
     <div class="page-header">
         <h1>Sections</h1>
     </div>
+    <div class="pull-right">
+        Search: <input ng-model="searchText">
+    </div>
+    <br/><br/>
     <div class="list-group">
-        <a data-ng-repeat="section in sections" data-ng-href="#!/sections/{{section._id}}" class="list-group-item">
+        <a data-ng-repeat="section in sections | filter:searchText" data-ng-href="#!/sections/{{section._id}}" class="list-group-item">
 			<small class="list-group-item-text">
 				Posted on
 				<span data-ng-bind="section.created | date:'medium'"></span>
