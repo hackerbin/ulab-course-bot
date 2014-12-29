@@ -12,13 +12,14 @@
 			</small>
 			<h4 class="list-group-item-heading" data-ng-bind="teacher.name"></h4>
             <h6 class="list-group-item-info" data-ng-bind="teacher.designation"></h6>
-            <div class="pull-right" onclick="alert('clicked')">
-                <i class="glyphicon glyphicon-envelope">Send Course Schedule</i>
-            </div>
+
             <br>
         </a>
 
     </div>
+    <!--<div class="pull-right btn btn-primary" data-ng-click="sendMail('robin@dexsa.org')">-->
+        <!--<i class="glyphicon glyphicon-envelope">Send Course Schedule</i>-->
+    <!--</div>-->
     <div class="alert alert-warning text-center" data-ng-hide="!teachers.$resolved || teachers.length">
     	No Teachers yet, why don't you <a href="/#!/teachers/create">create one</a>?
     </div>

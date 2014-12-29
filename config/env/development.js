@@ -2,6 +2,7 @@
 
 module.exports = {
 	db: 'mongodb://botuser:botpass@ds043180.mongolab.com:43180/coursebotdb',
+	//db: 'mongodb://user:pass@ds043180.mongolab.com:43180/localcoursebot',
 	app: {
 		title: 'CourseBot - Development Environment'
 	},

@@ -78,7 +78,7 @@ angular.module('assigncourses').controller('AssigncoursesController', ['$scope',
                 }
             });
             //$scope.filteredSections = sections in this.allSections where sections.course===this.selectedCourse.title ;
-        }
+        };
 
         // Find existing Assigncourse
         $scope.findOne = function () {

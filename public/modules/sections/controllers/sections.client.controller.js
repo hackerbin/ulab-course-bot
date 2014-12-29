@@ -6,7 +6,7 @@ angular.module('sections').controller('SectionsController', ['$scope', '$statePa
         $scope.authentication = Authentication;
         $scope.selectedCourse = {'title': ''};
         $scope.selectedDay = '';
-        $scope.days = ['Sun-Tue','Mon-Wed','Thu-Sat']
+        $scope.days = ['Sun-Tue','Mon-Wed','Thu-Sat'];
 
         // Create new Section
         $scope.create = function () {
@@ -32,7 +32,7 @@ angular.module('sections').controller('SectionsController', ['$scope', '$statePa
 
             }, function (errorResponse) {
                 //$scope.error = errorResponse.data.message;
-                $scope.errodoc = errorResponse;
+                //$scope.errodoc = errorResponse;
                 $scope.error = errorResponse.data.message;
             });
         };
@@ -53,7 +53,7 @@ angular.module('sections').controller('SectionsController', ['$scope', '$statePa
                 });
             }
         };
-        $scope.errodoc = {};
+        //$scope.errodoc = {};
         // Update existing Section
         $scope.update = function () {
             var section = $scope.section;
@@ -78,5 +78,4 @@ angular.module('sections').controller('SectionsController', ['$scope', '$statePa
                 sectionId: $stateParams.sectionId
             });
         };
-    }
-]);
+    }]);

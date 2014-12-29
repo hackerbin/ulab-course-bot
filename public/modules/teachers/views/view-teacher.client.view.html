@@ -33,6 +33,9 @@
 		</div>
 	</div>
 	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == teacher.user._id))">
+		<a class="btn btn-primary" data-ng-click='sendMail(teacher.email,teacher.name)'>
+			<i class="glyphicon glyphicon-envelope">Send Schedule</i>
+		</a>
 		<a class="btn btn-primary" href="/#!/teachers/{{teacher._id}}/edit">
 			<i class="glyphicon glyphicon-edit"></i>
 		</a>
@@ -48,4 +51,7 @@
 			<span data-ng-bind="teacher.user.displayName"></span>
 		</em>
 	</small>
+	<div data-ng-hide="!sent" class="text-danger">
+		<strong>Email sent</strong>
+	</div>
 </section>

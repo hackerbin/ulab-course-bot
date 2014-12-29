@@ -1,10 +1,11 @@
 'use strict';
 
 // Teachers controller
-angular.module('teachers').controller('TeachersController', ['$scope', '$stateParams', '$location', 'Authentication', 'Teachers',
-    function ($scope, $stateParams, $location, Authentication, Teachers) {
+angular.module('teachers').controller('TeachersController', ['$scope','$http','$stateParams', '$location', 'Authentication', 'Teachers', 'Sections',
+    function ($scope, $http, $stateParams, $location, Authentication, Teachers, Sections) {
         $scope.authentication = Authentication;
 
+        $scope.sections = [];
 
         // Create new Teacher
         $scope.create = function () {
@@ -34,6 +35,34 @@ angular.module('teachers').controller('TeachersController', ['$scope', '$statePa
                 $scope.error = errorResponse.data.message;
             });
         };
+        $scope.sent = false;
+        $scope.sendMail = function(mail,tid){
+            //$http.post('/teachers/mail', mail).
+            //    success(function(data, status, headers, config) {
+            //        // this callback will be called asynchronously
+            //        // when the response is available
+            //    }).
+            //    error(function(data, status, headers, config) {
+            //        // called asynchronously if an error occurs
+            //        // or server returns response with an error status.
+            //    });
+            $scope.sent = true;
+            $scope.find();
+            $http.post('/teachers/mail', angular.toJson(
+                {
+                    mail: mail,
+                    teacher : tid,
+                    sections: $scope.sections
+                }
+            ));
+            //
+            //$http(req).success(function(){
+            //    //
+            //}).error(function(){
+            //    //
+            //});
+        };
+
 
         // Remove existing Teacher
         $scope.remove = function (teacher) {
@@ -66,6 +95,7 @@ angular.module('teachers').controller('TeachersController', ['$scope', '$statePa
         // Find a list of Teachers
         $scope.find = function () {
             $scope.teachers = Teachers.query();
+            $scope.sections = Sections.query();
         };
 
         // Find existing Teacher

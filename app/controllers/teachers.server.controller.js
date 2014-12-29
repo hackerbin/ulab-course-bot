@@ -7,38 +7,65 @@ var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
 	Teacher = mongoose.model('Teacher'),
 	_ = require('lodash');
-var nodemailer = require("nodemailer");
+
+var nodemailer = require('nodemailer');
 /**
  * Create a Teacher
+ *
+ *
  */
 
-var mailOptions = {
-	from: 'Robin<sharmin.sultana.dola@gmail.com>', // sender address
-	to: 'robin@dexsa.org', // list of receivers
-	subject: 'test mail from robin', // Subject line
-	text: 'Hello from robin', // plaintext body
-	html: '<b>Hello Tanvir ✔</b>' // html body
-};
+
+
 
 var transporter = nodemailer.createTransport({
 	service: 'Gmail',
 	auth: {
-		user: 'sharmin.sultana.dola@gmail.com',
-		pass: 'qwerty098'
+		user: 'techdeciper@gmail.com',
+		pass: 'qwerty!23'
 	}
 });
+
+
+//var email = {address:'s@gmail.com'};
+exports.sendMail= function(req,res)
+{
+	var subj = 'course schedule of ' + req.body.teacher;
+	var sections = req.body.sections;
+
+	var htmlview = '<h1>' + 'Course Schedule of' + req.body.teacher+   '</h1>';
+	sections.forEach(function (section) {
+		//if(section.teacher === req.body.teacher)
+		htmlview = htmlview + '<br/>' + '<p>'+ 'course: '+ section.course + ', section: ' + section.name + ', day: '+section.day +', start: '+section.start+', end: '+section.end + '</p>';
+	});
+	htmlview = '<b>' + htmlview + '</b>';
+
+
+	var mailOptions = {
+		from: 'Ulab Course BOT <techdeciper@gmail.com>', // sender address
+		to: req.body.mail, // list of receivers
+		subject: subj, // Subject line
+		text: '', // plaintext body
+		html: '<b>course: Fundamental Computing, Code:CSE101, Section: 1</b>' // html body
+	};
+
+	transporter.sendMail(mailOptions, function(error, info){
+		if(error){
+			res.send({message:'failed'});
+			console.log(error);
+		}else{
+			console.log('Message sent to: ' + req.body.mail);
+			res.send({message:'success'});
+		}
+	});
+};
+
+
 
 exports.create = function(req, res) {
 	var teacher = new Teacher(req.body);
 	teacher.user = req.user;
 
-	transporter.sendMail(mailOptions, function(error, info){
-		if(error){
-			console.log(error);
-		}else{
-			console.log('Message sent: ' + info.response);
-		}
-	});
 
 	teacher.save(function(err) {
 		if (err) {
@@ -97,7 +124,6 @@ exports.update = function(req, res) {
  */
 exports.delete = function(req, res) {
 	var teacher = req.teacher ;
-
 	teacher.remove(function(err) {
 		if (err) {
 			return res.status(400).send({
@@ -112,7 +138,8 @@ exports.delete = function(req, res) {
 /**
  * List of Teachers
  */
-exports.list = function(req, res) { 
+exports.list = function(req, res) {
+
 	Teacher.find().sort('-created').populate('user', 'displayName').exec(function(err, teachers) {
 		if (err) {
 			return res.status(400).send({
@@ -137,12 +164,6 @@ exports.teacherByID = function(req, res, next, id) {
 };
 
 
-exports.testMethod = function(req,res) {
-	var teacher = req.teacher ;
-	sendmail();
-	res.jsonp(req.teacher);
-
-};
 
 /**
  * Teacher authorization middleware
