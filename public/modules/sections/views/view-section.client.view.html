@@ -13,11 +13,11 @@
 
 		<label class="list-group-item-info" for="tid">Start Time</label>
 		<div>
-			<h4 id="start">{{section.start}}</h4>
+			<h4 id="start">{{section.start | date: 'shortTime'}}</h4>
 		</div>
 		<label class="list-group-item-info" for="tid">End Time</label>
 		<div>
-			<h4 id="tid">{{section.end}}</h4>
+			<h4 id="tid">{{section.end | date: 'shortTime'}}</h4>
 		</div>
 
 	</div>
