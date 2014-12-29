@@ -16,6 +16,9 @@ angular.module('assigncourses').controller('AssigncoursesController', ['$scope',
                 section: this.selectedSection.name
             });
 
+
+
+
             // Redirect after save
             assigncourse.$save(function (response) {
                 $location.path('assigncourses/' + response._id);

@@ -15,6 +15,10 @@ exports.create = function(req, res) {
 	var assigncourse = new Assigncourse(req.body);
 	assigncourse.user = req.user;
 
+
+
+
+
 	assigncourse.save(function(err) {
 		if (err) {
 			return res.status(400).send({

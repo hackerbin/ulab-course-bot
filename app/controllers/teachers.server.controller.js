@@ -19,10 +19,10 @@ var nodemailer = require('nodemailer');
 
 
 var transporter = nodemailer.createTransport({
-	service: 'Gmail',
+	service: 'Mandrill',
 	auth: {
-		user: 'techdecipher@gmail.com',
-		pass: 'qwerty!23'
+		user: 'sharmin.sultana.dola@gmail.com',
+		pass: 'jI43KyXI1DB5r7ShgakCaA'
 	}
 });
 
@@ -97,7 +97,7 @@ exports.read = function(req, res) {
 //	service: "Gmail",
 //	auth: {
 //		user: "techdecipher@gmail.com",
-//		pass: "qwerty!23"
+//		pass: "as"
 //	}
 //});
 /**
