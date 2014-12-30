@@ -19,7 +19,7 @@
                     <!--<span>{{selectedCourse}}</span>-->
                     <label class="control-label" for="section">Section</label>
                     <div class="controls">
-                        <select data-ng-options="o.name for o in filteredSections" id="section" data-ng-model="selectedSection" required></select>
+                        <select data-ng-options="o.name for o in filteredSections" id="section" data-ng-model="selectedSection" data-ng-change="detectCollision()" required></select>
                     </div>
                     <!--<span>{{selectedSection}}</span>-->
                 </div>
@@ -29,6 +29,9 @@
 				<div data-ng-show="error" class="text-danger">
 					<strong data-ng-bind="error"></strong>
 				</div>
+                <div data-ng-show="myError" class="text-danger">
+                    <strong data-ng-bind="myError"></strong>
+                </div>
             </fieldset>
         </form>
     </div>

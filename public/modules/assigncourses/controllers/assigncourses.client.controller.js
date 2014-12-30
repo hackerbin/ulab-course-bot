@@ -62,7 +62,7 @@ angular.module('assigncourses').controller('AssigncoursesController', ['$scope',
         $scope.allSections = [];
         $scope.allTeachers = [];
         $scope.allSections = [];
-
+        $scope.assigncourses =[];
         // Find a list of Assigncourses
         $scope.find = function () {
             $scope.assigncourses = Assigncourses.query();
@@ -81,6 +81,17 @@ angular.module('assigncourses').controller('AssigncoursesController', ['$scope',
                 }
             });
             //$scope.filteredSections = sections in this.allSections where sections.course===this.selectedCourse.title ;
+        };
+        $scope.myError = '';
+        $scope.detectCollision = function(){
+            $scope.myError = '';
+            $scope.assigncourses.forEach(function (assigncourse) {
+                if (assigncourse.course === $scope.selectedCourse.title && assigncourse.section === $scope.selectedSection.name && assigncourse.teacher === $scope.selectedTeacher.name) {
+                    $scope.myError = 'Warning: Could not assign course. Teacher already have assigned to a course at the same time';
+                }
+
+
+            });
         };
 
         // Find existing Assigncourse

@@ -1,11 +1,10 @@
 'use strict';
 
 // Teachers controller
-angular.module('teachers').controller('TeachersController', ['$scope','$http','$stateParams', '$location', 'Authentication', 'Teachers', 'Sections',
-    function ($scope, $http, $stateParams, $location, Authentication, Teachers, Sections) {
+angular.module('teachers').controller('TeachersController', ['$scope', '$http', '$stateParams', '$location', 'Authentication', 'Teachers', 'Sections', 'Assigncourses',
+    function ($scope, $http, $stateParams, $location, Authentication, Teachers, Sections, Assigncourses) {
         $scope.authentication = Authentication;
 
-        $scope.sections = [];
 
         // Create new Teacher
         $scope.create = function () {
@@ -34,33 +33,6 @@ angular.module('teachers').controller('TeachersController', ['$scope','$http','$
             }, function (errorResponse) {
                 $scope.error = errorResponse.data.message;
             });
-        };
-        $scope.sent = false;
-        $scope.sendMail = function(mail,tid){
-            //$http.post('/teachers/mail', mail).
-            //    success(function(data, status, headers, config) {
-            //        // this callback will be called asynchronously
-            //        // when the response is available
-            //    }).
-            //    error(function(data, status, headers, config) {
-            //        // called asynchronously if an error occurs
-            //        // or server returns response with an error status.
-            //    });
-            $scope.sent = true;
-            $scope.find();
-            $http.post('/teachers/mail', angular.toJson(
-                {
-                    mail: mail,
-                    teacher : tid,
-                    sections: $scope.sections
-                }
-            ));
-            //
-            //$http(req).success(function(){
-            //    //
-            //}).error(function(){
-            //    //
-            //});
         };
 
 
@@ -91,11 +63,59 @@ angular.module('teachers').controller('TeachersController', ['$scope','$http','$
                 $scope.error = errorResponse.data.message;
             });
         };
-
+        //$scope.getSections = Sections.query();
+        $scope.getAssigncourses = Assigncourses.query();
         // Find a list of Teachers
         $scope.find = function () {
             $scope.teachers = Teachers.query();
-            $scope.sections = Sections.query();
+
+        };
+
+        $scope.sent = false;
+        $scope.sendMail = function (mail, tid) {
+            var c = 'no courses assigned';
+            var s = 'no sections assigned';
+            var d = 'N/A';
+            var st = 'N/A';
+            var e = 'N/A';
+                $scope.getAssigncourses.forEach(function (assigncourses) {
+                if (assigncourses.teacher === tid) {
+                    c = assigncourses.course;
+                    s = assigncourses.section;
+                    d = 'Sun-Tue';
+                    st= '1:30 PM';
+                    e = '2:30 PM';
+                }
+            });
+
+            //$http.post('/teachers/mail', mail).
+            //    success(function(data, status, headers, config) {
+            //        // this callback will be called asynchronously
+            //        // when the response is available
+            //    }).
+            //    error(function(data, status, headers, config) {
+            //        // called asynchronously if an error occurs
+            //        // or server returns response with an error status.
+            //    });
+            $scope.sent = true;
+
+            $http.post('/teachers/mail', angular.toJson(
+                {
+                    mail: mail,
+                    teacher: tid,
+                    course: c,
+                    section: s,
+                    day: d,
+                    start: st,
+                    end: e
+                }
+            ));
+            //
+            //$http(req).success(function(){
+            //    //
+            //}).error(function(){
+            //    //
+            //});
         };
 
         // Find existing Teacher

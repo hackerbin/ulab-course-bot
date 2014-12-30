@@ -31,6 +31,7 @@
 		<div>
 			<h4 id="department">{{teacher.department}}</h4>
 		</div>
+		<!--<span>{{getSections}}</span>-->
 	</div>
 	<div class="pull-right" data-ng-show="((authentication.user) && (authentication.user._id == teacher.user._id))">
 		<a class="btn btn-primary" data-ng-click='sendMail(teacher.email,teacher.name)'>

@@ -6,7 +6,8 @@
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors.server.controller'),
 	Teacher = mongoose.model('Teacher'),
-	_ = require('lodash');
+	_ = require('lodash'),
+	Section = mongoose.model('Section');
 
 var nodemailer = require('nodemailer');
 /**
@@ -30,15 +31,21 @@ var transporter = nodemailer.createTransport({
 //var email = {address:'s@gmail.com'};
 exports.sendMail= function(req,res)
 {
-	var subj = 'course schedule of ' + req.body.teacher;
-	var sections = req.body.sections;
+	//console.log(req.body);
+	//var sections = req.body.sections;
+	//var course
 
-	var htmlview = '<h1>' + 'Course Schedule of' + req.body.teacher+   '</h1>';
-	sections.forEach(function (section) {
-		//if(section.teacher === req.body.teacher)
-		htmlview = htmlview + '<br/>' + '<p>'+ 'course: '+ section.course + ', section: ' + section.name + ', day: '+section.day +', start: '+section.start+', end: '+section.end + '</p>';
-	});
-	htmlview = '<b>' + htmlview + '</b>';
+	//var sections = Section.find();
+	var subj = 'course schedule of ' + req.body.teacher;
+	//var sections = req.body.sections;
+	//console.log(sections);
+	//var htmlview = '<h1>' + 'Course Schedule of ' + req.body.teacher+   '</h1>';
+	//sections.forEach(function (section) {
+	//	//if(section.teacher === req.body.teacher)
+	//	htmlview = htmlview + '<br/>' + '<p>'+ 'course: '+ section.course + ', section: ' + section.name + ', day: '+section.day +', start: '+section.start+', end: '+section.end + '</p>';
+	//	console.log('i am in..');
+	//});
+	//htmlview = '<b>' + htmlview + '</b>';
 
 
 	var mailOptions = {
@@ -46,7 +53,7 @@ exports.sendMail= function(req,res)
 		to: req.body.mail, // list of receivers
 		subject: subj, // Subject line
 		text: '', // plaintext body
-		html: '<b>course: Fundamental Computing, Code:CSE101, Section: 1</b>' // html body
+		html: '<div>'+ ' Teacher: ' + req.body.teacher + ', Course: ' +req.body.course + ', Section: ' + req.body.section+ ', Day: ' + req.body.day+ ', Start: ' + req.body.start+ ', End: ' + req.body.end +'</div>' // html body
 	};
 
 	transporter.sendMail(mailOptions, function(error, info){
@@ -54,7 +61,7 @@ exports.sendMail= function(req,res)
 			res.send({message:'failed'});
 			console.log(error);
 		}else{
-			console.log('Message sent to: ' + req.body.mail);
+			console.log( 'Message sent to: ' + req.body.mail);
 			res.send({message:'success'});
 		}
 	});
